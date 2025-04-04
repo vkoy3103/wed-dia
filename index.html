@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảo Vệ Chủ Quyền Biển Đảo</title>
+    <style>
+    body { 
+        font-family: Arial, sans-serif; 
+        background-color: #e0f7fa; 
+        margin: 0; 
+        padding: 0; 
+        height: 100vh; 
+        overflow-y: auto; 
+    }
+
+    header { 
+    text-align: center;
+    padding: 20px; 
+    background-image: url(https://images.baoangiang.com.vn/image/fckeditor/upload/2018/20180705/images/thumb_660_30cd9fc0-52ef-4e71-bfcb-381beb2707f5.jpg); 
+    background-size: 100% 300px;   /* Đặt chiều rộng 100% và chiều cao cố định là 300px */
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-attachment: scroll; /* Không cần cố định */
+    color: white;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
+    background-color: rgba(0, 0, 0, 0.3); /* Màu đen trong suốt */
+    background-blend-mode: darken;
+}
+    h1 {
+        font-size: 50px;
+    }
+    p{
+        font-size: 20px;
+    }
+
+    footer { 
+        text-align: center; 
+        padding: 10px; 
+        background-color: #0077b6; 
+        color: white; 
+        position: fixed; 
+        width: 100%; 
+        bottom: 0; 
+        box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+    }
+
+    .container { 
+        padding: 20px; 
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .card { 
+        background: rgb(240, 253, 254);
+        opacity: 0.8;
+        width: 220px;
+        height: 220px;   
+        padding: 20px; 
+        border-radius: 12px; 
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);  
+        cursor: pointer; 
+        margin: 15px;  
+        transition: transform 0.3s, box-shadow 0.3s;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    
+    .card h2 {
+        margin: 2px;
+        font-size: 22px;
+        text-align: center;
+        color: #004997;
+    }
+    
+    .card p {
+    margin-top: auto;
+    margin-bottom: auto;
+    text-align: center;
+}
+
+
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    } 
+
+    .modal { 
+        display: none; 
+        position: fixed; 
+        top: 0; 
+        left: 0; 
+        width: 100%; 
+        height: 100%; 
+        background-color: rgba(0, 0, 0, 0.6); 
+        transition: opacity 0.3s;
+    }
+
+    .modal-content { 
+        margin: 5% auto; 
+        padding: 20px; 
+        background: white; 
+        border-radius: 12px; 
+        width: 80%; 
+        max-width: 1200px; 
+        height: 80%; 
+        overflow-y: auto; 
+        transform: scale(0.8); 
+        opacity: 0; 
+        transition: all 0.3s;
+    }
+
+    .modal.show .modal-content { 
+        transform: scale(1); 
+        opacity: 1; 
+    }
+
+    .close { 
+        float: right; 
+        font-size: 20px; 
+        cursor: pointer; 
+        color: #ff5f5f;
+        transition: color 0.3s;
+    }
+
+    .close:hover { 
+        color: #e60000;
+    }
+
+    h2 {    
+        text-align: center;
+        color: #0077b6;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes fadeOut {
+        from { opacity: 1; }
+        to { opacity: 0; }
+    }
+    .introduction {
+    padding: 20px;
+    background: #ffffff;
+    margin: 20px auto;
+    width: 80%;
+    font-size: 22px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.introduction h2 {
+    text-align: left;
+    margin-left: 20px;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px; /* Tạo khoảng cách giữa văn bản và bản đồ */
+}
+
+.content p {
+    flex: 1;
+    text-align: left;
+    font-size: 22.6px;
+    margin: 10px 0;
+    padding: 0 20px;
+}
+
+.content iframe {
+    flex-shrink: 0;
+    width: 45%;
+    height: 430px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+    nav {
+    background-color: #0077b6;
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #ffd700;
+}
+
+.vung-bien {
+    font-size: 20px;
+    text-align: justify;
+    margin: 20px 10px;
+    line-height: 1.6;
+}
+
+.danh-sach-vung-bien {
+    font-size: 18px;
+    margin-left: 30px;
+    padding: 10px;
+    background: #f0f8ff;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.danh-sach-vung-bien li {
+    margin-bottom: 8px;
+    font-size: 20px;
+    list-style-type: "🌊 ";
+}
+.bien-dong {
+    font-size: 20px;
+    line-height: 1.6;
+    text-align: justify;
+    background-color: #f0f8ff; /* Màu nền nhẹ */
+    padding: 15px;
+    border-left: 5px solid #0077b6; /* Thanh bên trái tạo điểm nhấn */
+    border-radius: 5px;
+    margin: 20px 0;
+}
+.sovereignty {
+    background: #f9f9f9;
+    padding: 30px;
+    margin: 40px auto;
+    width: 85%;
+    border-radius: 12px;
+    font-size: 20px;
+    line-height: 1.7;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.sovereignty h2 {
+    font-size: 28px;
+    color: #006699;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.sovereignty h3 {
+    font-size: 22px;
+    color: #003366;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.sovereignty p {
+    margin-bottom: 15px;
+}
+
+.sovereignty ul {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+.sovereignty li {
+    margin-bottom: 10px;
+}
+
+.resources {
+    background-color: #f9f9f9;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    margin: 30px auto;
+    width: 85%;
+    font-size: 20px;
+    line-height: 1.7;
+    color: #333;
+}
+
+.resources h3 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #004466;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.resources ul {
+    margin-left: 30px;
+}
+
+.resources li {
+    margin-bottom: 8px;
+    list-style-type: disc;
+}
+
+.protection {
+    background: #f9fcff;
+    padding: 20px;
+    margin: 30px auto;
+    border-radius: 12px;
+    width: 85%;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.protection h2 {
+    text-align: center;
+    font-size: 26px;
+    color: #1d3557;
+    margin-bottom: 20px;
+}
+
+.section {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #ffffff;
+    border-left: 5px solid #0077b6;
+    border-radius: 8px;
+}
+
+.section h3 {
+    color: #023e8a;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.section ul {
+    margin-left: 20px;
+    list-style-type: disc;
+}
+
+.section ul li {
+    font-size: 20px;
+    line-height: 1.6;
+    margin-bottom: 8px;
+}
+.law {
+    background-color: #f7f7f7;
+    padding: 25px;
+    border-radius: 10px;
+    margin: 30px auto;
+    width: 80%;
+    font-size: 18px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.15);
+}
+
+.law h2 {
+    text-align: center;
+    color: #0e4d92;
+    font-size: 26px;
+    margin-bottom: 20px;
+}
+
+.law .section {
+    background: #ffffff;
+    padding: 20px;
+    margin-bottom: 25px;
+    border-left: 5px solid #0e4d92;
+    border-radius: 8px;
+}
+
+.law .section h3 {
+    color: #023e8a;
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.law .section ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    font-size: 20px;
+    line-height: 1.6;
+    color: #333;
+}
+.all {    padding: 20px;
+    background: #ffffff;
+    margin: 20px auto;
+    width: 80%;
+    font-size: 22px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);}
+    .conclusion {
+    padding: 30px;
+    background: #f9f9f9; /* Màu nền sáng nhẹ */
+    margin: 30px auto;
+    width: 75%;
+    font-size: 22px;
+    border-radius: 12px; /* Bo góc mềm mại */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Tăng bóng đổ nhẹ */
+    transition: all 0.3s ease; /* Hiệu ứng chuyển động nhẹ */
+}
+
+.conclusion:hover {
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2); /* Tăng độ bóng khi hover */
+    transform: translateY(-5px); /* Dịch chuyển nhẹ khi hover */
+}
+
+.conclusion h2 {
+    text-align: left;
+    margin-left: 20px;
+    font-size: 26px;
+    color: #2e3d49; /* Màu sắc nhẹ nhàng cho tiêu đề */
+    font-weight: bold;
+    border-bottom: 3px solid #3498db; /* Thêm đường gạch chân màu xanh dương */
+    padding-bottom: 8px;
+    transition: color 0.3s ease; /* Hiệu ứng chuyển màu tiêu đề */
+}
+
+.conclusion h2:hover {
+    color: #3498db; /* Thay đổi màu tiêu đề khi hover */
+}
+
+.conclusion p {
+    text-align: left;
+    font-size: 22px;
+    margin: 15px 0;
+    padding: 20px; /* Thêm padding cho nội dung chữ */
+    line-height: 1.8;
+    color: #000000; /* Màu chữ tối hơn một chút */
+    font-family: 'Arial', sans-serif; /* Phông chữ dễ đọc */
+    background-color: #e7f7ff; /* Thêm nền màu xanh nhạt cho văn bản */
+    border-radius: 8px; /* Bo góc nhẹ cho nền */
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1); /* Bóng nhẹ cho nền chữ */
+    transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu nền khi hover */
+}
+
+.sovereignty img{align-items: center;}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.image-container2 img {
+  width: 100%;
+  height: auto;
+  max-width: 500px;  
+}
+.image-container2 {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+} 
+
+.image-container p {
+    font-size: 16px;
+}
+.image-item {
+  text-align: center; /* Căn giữa ảnh và chú thích */
+}
+
+img {
+  width: 100%;
+  height: auto;
+  max-width: 400px; /* Đảm bảo ảnh không quá rộng */
+}
+
+.caption {
+  font-size: 14px;
+  color: #777;
+  margin-top: 8px;
+}
+
+
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Bảo Vệ Chủ Quyền Biển Đảo Việt Nam</h1>
+        <p>Cùng nhau chung tay bảo vệ biển đảo quê hương.</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#" class="scroll-to" data-target=".gioithieu">Giới Thiệu</a></li>
+            <li><a href="#" class="scroll-to" data-target=".vtdl">vị trí địa lý</a></li>
+            <li><a href="#" class="scroll-to" data-target=".all">Bảo vệ chủ quyền biển đảo Việt Nam</a></li>
+            <li><a href="#" class="scroll-to" data-target=".conclusion">Kết luận</a></li>
+        </ul>
+
+    </nav>
+    
+    
+
+    <div class="introduction">
+        <h2 class="gioithieu">Giới Thiệu</h2>
+        <div class="content">
+            <p class="bien-dong">
+                <strong>BIỂN ĐÔNG</strong> là một biển nửa kín, được bao bọc bởi lục địa châu Á và bán đảo Malacca về phía Tây, đảo Đài Loan, quần đảo Philippines và đảo Kalimantan về phía Đông. Với diện tích khoảng <strong>3,5 triệu km²</strong>, <strong>Biển Đông</strong> là một trong những vùng biển lớn nhất thế giới, có vai trò quan trọng về <strong>kinh tế, giao thương và an ninh khu vực</strong>. Đây là <strong>tuyến hàng hải quốc tế huyết mạch</strong>, kết nối các nền kinh tế lớn và là khu vực giàu tài nguyên thiên nhiên, đặc biệt là <strong>dầu khí và hải sản</strong>. Không chỉ vậy, <strong>Biển Đông</strong> còn mang ý nghĩa <strong>chiến lược về quốc phòng</strong>, là nơi tranh chấp chủ quyền giữa nhiều quốc gia. Trong bối cảnh hiện nay, việc <strong>bảo vệ chủ quyền biển đảo, giữ vững hòa bình và ổn định trên Biển Đông</strong> là nhiệm vụ quan trọng của mỗi quốc gia ven biển, đặc biệt là <strong>Việt Nam</strong>.
+            </p>
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d7305741.766206365!2d112.87346799223269!3d15.056312437280877!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1743135275214!5m2!1svi!2s" 
+                width="450" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </div>
+
+    <div class="introduction">
+        <h2 class="vtdl">Vị trí địa lý</h2>
+        <p class="vung-bien">
+            Việt Nam có đường bờ biển dài khoảng <strong>3.260 km</strong>, kéo dài từ <strong>Móng Cái (Quảng Ninh)</strong> đến <strong>Hà Tiên (Kiên Giang)</strong>.  
+            Tiếp giáp với nhiều quốc gia như Trung Quốc, Philippines, Malaysia, Brunei và Indonesia.  iển Đông có diện tích khoảng 
+            <strong>3,5 triệu km²</strong>, trải rộng từ vĩ độ <strong>3°</strong> lên đến vĩ độ <strong>26° Bắc</strong> và từ 
+            kinh độ <strong>100°</strong> đến <strong>121° Đông</strong>, được bao bọc bởi <strong>9 nước</strong>: Việt Nam, Trung Quốc, 
+            Phi-líp-pin, In-đô-nê-xia, Bru-nây, Ma-lai-xia, Xinh-ga-po, Thái Lan, Căm-pu-chia và một vùng lãnh thổ là Đài Loan.
+        </p>
+        <ul class="danh-sach-vung-bien">
+            <li><strong>Lãnh hải:</strong> 12 hải lý từ bờ biển</li>
+            <li><strong>Vùng tiếp giáp lãnh hải:</strong> 24 hải lý</li>
+            <li><strong>Vùng đặc quyền kinh tế (EEZ):</strong> 200 hải lý</li>
+            <li><strong>Thềm lục địa:</strong> Mở rộng tùy theo địa hình đáy biển</li>
+        </ul>        
+    </div>
+
+<div class="all">
+    <h2 class="vtdl">Bảo vệ chủ quyền biển đảo Việt Nam</h2>
+    <div class="container">
+        <div class="card" onclick="openModal('modal1')">
+            <h2>Lịch Sử Chủ Quyền</h2>
+            <p>Tìm hiểu về các sự kiện lịch sử chứng minh chủ quyền biển đảo Việt Nam.</p>
+        </div>
+
+        <div class="card" onclick="openModal('modal2')">
+            <h2>Kiến Thức Biển Đảo</h2>
+            <p>Cung cấp các kiến thức hữu ích về biển đảo và tài nguyên thiên nhiên.</p>
+        </div>
+
+        <div class="card" onclick="openModal('modal3')">
+            <h2>Hoạt Động Bảo Vệ</h2>
+            <p>Những hoạt động đang diễn ra để bảo vệ chủ quyền biển đảo.</p>
+        </div>
+
+        <div class="card" onclick="openModal('modal5')">
+            <h2>Pháp Lý Quốc Tế</h2>
+            <p>Các quy định, điều luật quốc tế liên quan đến chủ quyền biển đảo.</p>
+        </div>
+    </div>
+</div>
+
+    <!-- Modals -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal1')">&times;</span>
+            <h2>Lịch Sử Chủ Quyền</h2>
+            <div class="sovereignty">
+                <h2>🛡️ Chủ quyền biển đảo Việt Nam qua các thời kỳ</h2>
+                <p>
+                  Chủ quyền biển đảo của Việt Nam đã được <strong>khẳng định rõ ràng qua nhiều thời kỳ lịch sử</strong>, thể hiện sự quản lý
+                  <strong>liên tục và hợp pháp</strong> của Nhà nước Việt Nam đối với quần đảo <strong>Hoàng Sa, Trường Sa</strong> và các vùng biển liên quan.
+                </p>
+              
+                <h3>1. Thời kỳ phong kiến</h3>
+                <ul>
+                  <li>
+                    <strong>Thế kỷ XVII – XVIII:</strong> Từ thời <strong>chúa Nguyễn</strong>, <strong>đội Hoàng Sa</strong> và <strong>đội Bắc Hải</strong> đã được thành lập để 
+                    khai thác hải sản, đo đạc thủy trình và bảo vệ vùng biển.<br>
+                    → Các tài liệu như <em>“Phủ biên tạp lục”</em> (Lê Quý Đôn, 1776) và <em>“Đại Nam thực lục”</em> đều ghi chép hoạt động này.
+                  </li>
+                  <li>
+                    <strong>Thời Nguyễn (1802 – 1945):</strong> Năm <strong>1816</strong>, vua <strong>Gia Long</strong> chính thức xác lập chủ quyền tại Hoàng Sa. Vua
+                    <strong>Minh Mạng</strong> cho dựng bia, xây miếu chủ quyền.<br>
+                    → Bản đồ <em>“Đại Nam nhất thống toàn đồ”</em> (1838) khẳng định chủ quyền của Việt Nam.
+                  </li>
+                </ul>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/DaiNamNhatThongToanDo_1834-1838.jpg/800px-DaiNamNhatThongToanDo_1834-1838.jpg" alt="Đại Nam nhất thống toàn đồ"width="400px"height="auto"style="display: block; margin: 0 auto;">
+                <h3>2. Thời Pháp thuộc (1858 – 1945)</h3>
+                <ul>
+                  <li>Chính quyền Pháp tiếp tục quản lý Hoàng Sa, Trường Sa sau khi chiếm Việt Nam.</li>
+                  <li>Năm <strong>1933</strong>, Pháp tuyên bố sáp nhập quần đảo Trường Sa vào Việt Nam và giao cho tỉnh Bà Rịa quản lý.</li>
+                </ul>
+              
+                <h3>3. Giai đoạn 1945 – 1975</h3>
+                <ul>
+                  <li>Chính phủ Việt Nam Dân chủ Cộng hòa và Việt Nam Cộng hòa đều khẳng định chủ quyền liên tục.</li>
+                  <li>Năm <strong>1956</strong>: Hải quân Việt Nam Cộng hòa tiếp quản Hoàng Sa.</li>
+                  <li>Năm <strong>1974</strong>: Trung Quốc chiếm Hoàng Sa, nhưng Việt Nam vẫn giữ lập trường chủ quyền.</li>
+                </ul>
+              
+                <h3>4. Sau năm 1975 – nay</h3>
+                <ul>
+                  <li>Việt Nam tiếp tục quản lý Trường Sa và bảo vệ chủ quyền Hoàng Sa bằng nhiều phương pháp.</li>
+                  <li>Năm <strong>1988</strong>: 64 chiến sĩ hy sinh tại Gạc Ma trong cuộc chiến bảo vệ Trường Sa.</li>
+                  <li>Việt Nam sử dụng tư liệu lịch sử, bản đồ và công cụ pháp lý, ngoại giao để khẳng định chủ quyền.</li>
+                </ul>
+                <img src="https://i.ytimg.com/vi/U4_HazNusVk/maxresdefault.jpg"alt="bảo vệ Gạc Ma năm 1988"width="600px"height="auto"style="display: block; margin: 0 auto;">
+              
+                <p><strong>→ Chủ quyền biển đảo Việt Nam là sự thật lịch sử và pháp lý không thể phủ nhận!</strong></p>
+              </div>
+        </div>
+    </div>
+
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal2')">&times;</span>
+            <h2>Kiến Thức Biển Đảo</h2>
+            <div class="resources">
+                <h3>1. Vùng biển và quần đảo</h3>
+                <p>
+                    Việt Nam sở hữu một bờ biển dài khoảng 3.260 km, tiếp giáp với Biển Đông. Trong đó có nhiều quần đảo và rạn san hô nổi bật như 
+                    quần đảo Trường Sa, Hoàng Sa, Côn Đảo, Phú Quốc và nhiều quần đảo nhỏ khác. Những khu vực này không chỉ có giá trị chiến lược 
+                    về quốc phòng mà còn là nguồn tài nguyên kinh tế tiềm năng như đánh bắt hải sản, du lịch biển và khai thác dầu khí.
+                </p>
+                <div class="image-container">
+                    <div class="image-item">
+                      <img src="https://www.angiang.dcs.vn/XDDImages/2015/Thang4/Hoangsa21.jpg" alt="Image 1">
+                      <p class="caption">Hoàng Sa</p>
+                    </div>
+                    
+                    <div class="image-item">
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Spratly_Island.png" alt="Image 2">
+                      <p class="caption">Trường Sa</p>
+                    </div>
+                    
+                    <div class="image-item">
+                      <img src="https://dulichsucsongviet.com/images/2019-02/phu-quoc-vitri.jpg" alt="Image 3">
+                      <p class="caption">Phú Quốc</p>
+                    </div>
+                  </div>
+                  
+                <h3>2. Tài nguyên thiên nhiên</h3>
+                <ul>
+                    <li><strong>Tài nguyên khoáng sản:</strong> Bao gồm sắt, than, dầu khí, khí đốt... được khai thác ở nhiều vùng miền.</li>
+                    <li><strong>Rừng và đa dạng sinh học:</strong> Việt Nam sở hữu hệ sinh thái rừng phong phú, nhiều loài quý hiếm.</li>
+                    <li><strong>Nước và hệ thống sông ngòi:</strong> Các con sông lớn như sông Hồng, sông Cửu Long hỗ trợ nông nghiệp và thủy sản.</li>
+                </ul>
+                <div class="image-container">
+                    <div class="image-item">
+                      <img src="https://moitruongviet.edu.vn/wp-content/uploads/2016/12/ks.png" alt="Image 1" >
+                      <p class="caption">Tài nguyên khoáng sản</p>
+                    </div>
+                    
+                    <div class="image-item">
+                      <img src="https://phuong3.tayninh.gov.vn/uploads/news/2024_03/tiem-nang-he-sinh-thai-bien-viet-nam.jpg" alt="Image 2">
+                      <p class="caption">Rừng và đa dạng sinh học</p>
+                    </div>
+                  </div>
+                  
+                <h3>3. Vị trí chiến lược của Biển Đông</h3>
+                <p>Biển Đông là một trong những tuyến hàng hải quan trọng nhất thế giới, nối liền Thái Bình Dương và Ấn Độ Dương.</p>
+                <ul>
+                    <li>Là con đường vận chuyển **hơn 50%** khối lượng hàng hóa vận tải biển toàn cầu.</li>
+                    <li>Giàu tài nguyên thiên nhiên như dầu khí, hải sản.</li>
+                    <li>Đóng vai trò quan trọng trong an ninh, quốc phòng và phát triển kinh tế.</li>
+                    <li>Việt Nam có vị trí trung tâm trên tuyến hàng hải, giúp thúc đẩy thương mại và giao lưu quốc tế.</li>
+                </ul>
+                <div class="image-container2">
+                    <div class="image-item">
+                      <img src="https://www.container-transportation.com/images/global-drybulk-trade-and-key-routes.png" alt="Image 1" >
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal3')">&times;</span>
+            <h2>Hoạt Động bảo Vệ</h2>
+            <p><div class="protection">
+                <h2>🎖️ Hoạt động bảo vệ chủ quyền biển đảo Việt Nam</h2>
+            
+                <div class="section">
+                    <h3>1️⃣ Hoạt động của các lực lượng chức năng</h3>
+                    <ul>
+                        <li><strong>Tuần tra, kiểm soát:</strong> Cảnh sát biển, Hải quân, Bộ đội Biên phòng tuần tra bằng tàu, máy bay, hệ thống giám sát hiện đại.</li>
+                        <li><strong>Bảo vệ các hoạt động kinh tế:</strong> Bảo vệ khai thác dầu khí, đánh bắt hải sản; hỗ trợ ngư dân an toàn và phát triển kinh tế.</li>
+                        <li><strong>Ứng phó khẩn cấp:</strong> Sẵn sàng cứu hộ, cứu nạn, phòng chống thiên tai và sự cố môi trường trên biển.</li>
+                    </ul>
+                
+                <div class="image-container2">
+                    <div class="image-item">
+                      <img src="https://cdn.thuvienphapluat.vn//uploads/Hoidapphapluat/2023/MDV/thang3/noi-dung-hop-tac.jpg" alt="Image 1" >
+                    </div>
+                </div>
+            </div>
+                <div class="section">
+                    <h3>2️⃣ Các hoạt động ngoại giao và pháp lý</h3>
+                    <ul>
+                        <li><strong>Đấu tranh pháp lý:</strong> Sử dụng biện pháp hòa bình  hù hợp luật quốc tế, đặc biệt là UNCLOS 1982.</li>
+                        <li><strong>Hợp tác quốc tế:</strong> Tăng cường hợp tác khu vực và toàn cầu, tham gia diễn đàn quốc tế bảo vệ lợi ích Việt Nam.</li>
+                    </ul>
+                
+                <div class="image-container">
+                    <div class="image-item">
+                      <img src="https://tuyengiao.hagiang.gov.vn/upload/64711/20231003/grab3016athinhvuongvietnamcom109092023112028.png" alt="Image 1" >
+                    </div>
+                    
+                    <div class="image-item">
+                      <img src="https://old.canhsatbien.vn//upload/files/1/Hoat%20dong%20CSB/Hop%20tac%20quoc%20te/Nam%202021/Thang%2010/Tau%208001%20Giao%20luu%20tai%20An%20Do.jpg" alt="Image 2">
+                    </div>
+                  </div>
+                </div>
+                <div class="section">
+                    <h3>3️⃣ Hoạt động của cộng đồng và các tổ chức xã hội</h3>
+                    <ul>
+                        <li><strong>Tuyên truyền, giáo dục:</strong> Nâng cao nhận thức cộng đồng, phát động phong trào hướng về biển đảo.</li>
+                        <li><strong>Hỗ trợ ngư dân:</strong> Cung cấp trang thiết bị, thông tin, kiến thức và hỗ trợ tài chính khi cần thiết.</li>
+                        <li><strong>Các hoạt động khác:</strong> Xây dựng công trình văn hóa, bảo tồn môi trường biển và đảo.</li>
+                    </ul>
+                    <div class="image-container">
+                        <div class="image-item">
+                          <img src="https://lh5.googleusercontent.com/proxy/ZvhPX2BpIq9AuiREISPxv7kiJMbzvVkBM_0a1G_kPOa58yo5y5uhiZtvwyH4z6HHasSTZ_d6Ndg1KE5Dtxj7gcApJdR-l1e4Scp0YkFGB0sKqk5Rrg8xWRwjWSaurJO_Z8clCPNXs3Y82wQZWAyYAQ" alt="Image 1" >
+                        </div>
+                        
+                        <div class="image-item">
+                          <img src="https://ictv.1cdn.vn/2022/09/28/ictvietnam-mediacdn-vn-z3742126484516cad4de6dd6903f503434935df3990e87-1664154314060416989601.jpg" alt="Image 2">
+                        </div>
+                      </div>
+                </div>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+
+    <div id="modal5" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal5')">&times;</span>
+            <h2>Pháp Lý Quốc Tế</h2>
+            <div class="law">
+                <h2>⚖️ Luật pháp quốc tế liên quan đến chủ quyền biển đảo</h2>
+            
+                <div class="section">
+                    <h3>1️⃣ Công ước của Liên hợp quốc về Luật Biển năm 1982 (UNCLOS)</h3>
+                    <ul>
+                        <li>Văn bản pháp lý quốc tế toàn diện điều chỉnh các khía cạnh liên quan đến biển và đại dương.</li>
+                        <li>Quy định về lãnh hải, vùng tiếp giáp lãnh hải, vùng đặc quyền kinh tế (EEZ), thềm lục địa.</li>
+                        <li>Xác định quyền chủ quyền, quyền tài phán, và tự do hàng hải của các quốc gia ven biển.</li>
+                        <li>Việt Nam là thành viên của UNCLOS.</li>
+                    </ul>
+                    <div class="image-container2">
+                        <div class="image-item">
+                          <img src="https://ictv.1cdn.vn/2023/11/27/unclos-hien-phap-ve-bien-bao-trum-va-quan-trong-nhat-20221210152526.jpeg" alt="Image 1" >
+                        </div>
+                    </div>
+                </div>
+                <div class="section">
+                    <h3>2️⃣ Nguyên tắc chung của luật pháp quốc tế</h3>
+                    <ul>
+                        <li><strong>Chủ quyền quốc gia:</strong> Mỗi quốc gia có chủ quyền đối với lãnh thổ, bao gồm cả lãnh hải.</li>
+                        <li><strong>Không sử dụng vũ lực:</strong> Tranh chấp phải được giải quyết bằng biện pháp hòa bình.</li>
+                        <li><strong>Tự do hàng hải:</strong> Các quốc gia có quyền tự do di chuyển trên vùng biển quốc tế.</li>
+                    </ul>
+                    <div class="image-container">
+                        <div class="image-item">
+                          <img src="https://cdn-images.vtv.vn/thumb_w/640/2019/8/15/untitled-1565836326910591613921.png" alt="Image 1" >
+                        </div>
+                        
+                        <div class="image-item">
+                          <img src="https://imagevietnam.vnanet.vn//MediaUpload/Org/2023/09/19/519-12-45-8.jpg" alt="Image 2">
+                        </div>
+                      </div>
+                </div>
+                <div class="section">
+                    <h3>3️⃣ Quy định cụ thể về chủ quyền biển đảo</h3>
+                    <ul>
+                        <li><strong>Lãnh hải:</strong> Chủ quyền tuyệt đối cả về không phận và đáy biển.</li>
+                        <li><strong>EEZ:</strong> Quốc gia có quyền khai thác tài nguyên trong vùng đặc quyền kinh tế (200 hải lý).</li>
+                        <li><strong>Thềm lục địa:</strong> Quyền chủ quyền trong thăm dò, khai thác tài nguyên đáy biển.</li>
+                        <li><strong>Các đảo:</strong> Có thể có lãnh hải, EEZ và thềm lục địa riêng.</li>
+                    </ul>
+                    <div class="image-container">
+                        <div class="image-item">
+                          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Zonmar_vi.svg/1200px-Zonmar_vi.svg.png" alt="Image 1" >
+                        </div>
+                        
+                        <div class="image-item">
+                          <img src="https://cdn.thuvienphapluat.vn/phap-luat/2022-2/KL/them-luc-dia.jpg" alt="Image 2">
+                        </div>
+                      </div>
+                </div>
+                <div class="section">
+                    <h3>4️⃣ Biện pháp giải quyết tranh chấp</h3>
+                    <ul>
+                        <li>UNCLOS quy định đàm phán, hòa giải, trọng tài, và tòa án là các phương án giải quyết tranh chấp.</li>
+                        <li>Tòa án Công lý Quốc tế (ICJ) có vai trò trọng tài trong các tranh chấp giữa quốc gia.</li>
+                    </ul>
+                    <div class="image-container2">
+                        <div class="image-item">
+                          <img src="https://media.vov.vn/uploaded/1nuq1sd3egocrb7fgmumzw/2019_10_31/quy_vov_jtgy.jpg" alt="Image 1" >
+                        </div>
+                    </div>
+                </div>
+                <div class="section">
+                    <h3>🌐 Tầm quan trọng của luật pháp quốc tế</h3>
+                    <ul>
+                        <li>Giải quyết tranh chấp một cách hòa bình, có cơ sở pháp lý rõ ràng.</li>
+                        <li>Bảo vệ quyền và lợi ích chính đáng của quốc gia ven biển như Việt Nam.</li>
+                        <li>Đảm bảo hòa bình, ổn định và an ninh trong khu vực và trên thế giới.</li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="conclusion">
+        <h2>🔚 Kết luận</h2>
+        <p>Chủ quyền biển đảo của Việt Nam là một vấn đề quan trọng và không thể tách rời trong việc bảo vệ toàn vẹn lãnh thổ quốc gia. Những sự kiện lịch sử, cùng với các công ước quốc tế và pháp lý, đã xác định rõ ràng quyền lợi và trách nhiệm của Việt Nam đối với các vùng biển và đảo của mình, đặc biệt là trong Biển Đông.</p>
+        
+        <p>Việc duy trì và bảo vệ chủ quyền biển đảo không chỉ liên quan đến an ninh quốc gia, mà còn ảnh hưởng đến phát triển kinh tế, bảo vệ tài nguyên thiên nhiên và đảm bảo hòa bình, ổn định trong khu vực và trên thế giới. Mỗi cá nhân, tổ chức cần nâng cao ý thức về vấn đề này và tham gia vào các hoạt động bảo vệ chủ quyền đất nước.</p>
+        
+        <p class="highlight">Vì vậy, việc tiếp tục đấu tranh hòa bình, áp dụng các biện pháp ngoại giao và pháp lý, cùng với sự phối hợp của cộng đồng quốc tế là vô cùng quan trọng để giải quyết các tranh chấp liên quan đến Biển Đông.</p>
+    
+        <p>Chúng ta, với niềm tin vững chắc vào pháp lý quốc tế và sự hỗ trợ của cộng đồng quốc tế, sẽ tiếp tục đấu tranh và bảo vệ thành công chủ quyền biển đảo của Việt Nam.</p>
+    </div>
+    
+    <footer>
+        
+    </footer>
+
+    <script>
+       function openModal(id) {
+            const modal = document.getElementById(id);
+            modal.style.display = 'block';
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 10); 
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300); 
+        }
+
+        document.querySelectorAll('.scroll-to').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault(); // Ngăn chặn hành động mặc định của thẻ <a>
+            const target = document.querySelector(this.getAttribute('data-target'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+
+    </script>
+</body>
+</html>
