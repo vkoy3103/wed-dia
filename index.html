@@ -35,16 +35,39 @@
         font-size: 20px;
     }
 
-    footer { 
-        text-align: center; 
-        padding: 10px; 
-        background-color: #0077b6; 
-        color: white; 
-        position: fixed; 
-        width: 100%; 
-        bottom: 0; 
-        box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
-    }
+    .team-footer {
+  background-color: #004997;
+  color: white;
+  padding: 30px 40px;
+  text-align: center;
+}
+
+.team-footer h3 {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.team-columns {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+  flex-wrap: wrap;
+}
+
+.team-list {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+  min-width: 220px;
+}
+
+.team-list li {
+font-size: 20px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+
 
     .container { 
         padding: 20px; 
@@ -415,9 +438,9 @@ nav ul li a:hover {
 }
 
 .conclusion h2 {
-    text-align: left;
+    text-align: center;
     margin-left: 20px;
-    font-size: 26px;
+    font-size: 35px;
     color: #2e3d49; /* Màu sắc nhẹ nhàng cho tiêu đề */
     font-weight: bold;
     border-bottom: 3px solid #3498db; /* Thêm đường gạch chân màu xanh dương */
@@ -476,10 +499,65 @@ img {
 
 .caption {
   font-size: 14px;
-  color: #777;
+  color: #000000;
   margin-top: 8px;
 }
+.action {
+    padding: 30px;
+    background: #f9f9f9; /* Màu nền sáng nhẹ */
+    margin: 30px auto;
+    width: 75%;
+    font-size: 22px;
+    border-radius: 12px; /* Bo góc mềm mại */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Tăng bóng đổ nhẹ */
+    transition: all 0.3s ease; /* Hiệu ứng chuyển động nhẹ */
+}
 
+.local-actions {
+  padding: 0px 20px;
+  text-align: center;
+}
+
+.local-actions h3 {
+  font-size: 35px;
+  margin-bottom: 40px;
+}
+
+.action-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px; /* tăng khoảng cách giữa các ảnh */
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.action-item {
+  width: 180px;
+  margin: 10px; /* thêm khoảng cách quanh mỗi khung ảnh */
+  box-sizing: border-box;
+}
+
+
+.action-item img {
+  width: 200px;
+  height: 200px;
+  padding: auto;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+
+.action-item img:hover {
+  transform: scale(3);
+  z-index: 2;
+}
+
+
+.action-item p {
+  margin-top: 8px;
+  font-weight: bold;
+}
 
 
     </style>
@@ -825,10 +903,51 @@ img {
     
         <p>Chúng ta, với niềm tin vững chắc vào pháp lý quốc tế và sự hỗ trợ của cộng đồng quốc tế, sẽ tiếp tục đấu tranh và bảo vệ thành công chủ quyền biển đảo của Việt Nam.</p>
     </div>
-    
-    <footer>
-        
-    </footer>
+
+    <div class="action">
+        <section class="local-actions">
+            <h3>Hành động ở trường Trần Phú</h3>
+            <div class="action-gallery">
+              <div class="action-item">
+                <img src="https://scontent.fdad1-4.fna.fbcdn.net/v/t39.30808-6/489051371_1224238029712236_5346210473300072963_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeF3Fo9U5JcwrGcHgBakaJ1EZm01FRJTpMlmbTUVElOkyXvzIEidyqzw8QzSl_HkYE-4aIU2hNTt4FZqgAyxTPnT&_nc_ohc=8tAhioK9t30Q7kNvwET8aU3&_nc_oc=AdmqI4FtBzmptNfk66hf2rrfTqH4OniB6wp1wxsauWNODwo_EWNg59Tdr7F36QyV9cM&_nc_zt=23&_nc_ht=scontent.fdad1-4.fna&_nc_gid=1sLEvyZrT3tlIe2Vok-G8w&oh=00_AfFlPqj2cmo62Y_5OnTRG_G9jUxLAtFFUqSWm3TIvXEObg&oe=680EBAB8" >
+              </div>
+              <div class="action-item">
+                <img src="https://scontent.fdad1-3.fna.fbcdn.net/v/t39.30808-6/487787289_1218160950319944_2183486420488406162_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeE72QmSNnpFlrSuOi7T1ui2LJAL19odlO0skAvX2h2U7WVP0UJCp0lhmndjuWa9eMnmUPGhWE_KA6aqF_I1bz82&_nc_ohc=lNEBsPYmMNgQ7kNvwEbI-Dq&_nc_oc=AdmlVT99_EVYbav4PfUsMXyvtJrn9BVJ17aqwV446p3DKBt4l6Pak_CcuYuS5hzqz34&_nc_zt=23&_nc_ht=scontent.fdad1-3.fna&_nc_gid=q7HRgkHQokR6qAzNjI3WRw&oh=00_AfEE8oj__At6pGWzr6Qbg5QYbTLRjYcOBKEvpSeG24VCwQ&oe=680EC758" >
+              </div>
+              <div class="action-item">
+                <img src="https://scontent.fdad1-1.fna.fbcdn.net/v/t39.30808-6/487679985_1218161230319916_4281507042386218679_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeG9jFm63Oy8HCKcuB3T6rP3bjg17gVdQ0tuODXuBV1DS3GNSUXWgtLSxa-neQynKYzNKC4xPfFJCdE8B-3t-20G&_nc_ohc=V9ZJJyGxiF8Q7kNvwE-9_CZ&_nc_oc=AdkBGqc2wRnbOqXLxjDapBzQMGnCMXwPdy0ijhruQ2JxFX0sEmKOnWuxZePy9zU7dHo&_nc_zt=23&_nc_ht=scontent.fdad1-1.fna&_nc_gid=CkIdo5y0cCisZbVzdbSpag&oh=00_AfEOLk4nAWOqDvCNpjfxWH67AzLiShoLZFxnG1Jvhx0gSA&oe=680ECAE8" >
+              </div>
+              <div class="action-item">
+                <img src="https://scontent.fdad2-1.fna.fbcdn.net/v/t39.30808-6/487859715_1218162180319821_1661593745475275339_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeFO830iYJe2eFweWWZW7KZnt1ujUibygMK3W6NSJvKAwnQKSBocwMyw2AbIvmKtOOwyAxs9wfXQ-EP5qy6qYZKv&_nc_ohc=rsQJA5OMu8oQ7kNvwEi3Yr1&_nc_oc=Adm8XImvjaOmrz6_rWnLuN7AHrL57UaPLRRN7rYl90ptHoIadbHKF5mlqDINLNu8-bw&_nc_zt=23&_nc_ht=scontent.fdad2-1.fna&_nc_gid=zKaJ1Uad43q2SV1Ublo3gg&oh=00_AfFN5yPu2fS_TBwLZm2CEE5rKLvvRgp0535uwHy9s7JPjg&oe=680EEF70">
+              </div>
+              <div class="action-item">
+                <img src="https://scontent.fdad2-1.fna.fbcdn.net/v/t39.30808-6/487825523_1218162680319771_4163816931263457073_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGFoySMVQ9pVDiaQC8gUAVx9Jwd04wEo4j0nB3TjASjiBC_X7NMc9KCZML_drHrjbWLfa3mi-BEjoHGqYjvuNKj&_nc_ohc=QPcbNZSvlA8Q7kNvwFJCWdG&_nc_oc=AdkM5WudpY0sueOFJAV-lhKEXt-leBxlwYyY4O8q4SIKYq-uBf0ktKnjOCdPY-ogVp0&_nc_zt=23&_nc_ht=scontent.fdad2-1.fna&_nc_gid=ye6wHJuazDwGDknZIWiOKw&oh=00_AfGqTsxfPFGrkieuYx88R4dgny_32PubM5KWdQZ6Xib0ag&oe=680EEA1F">
+              </div>
+            </div>
+          </section>
+          
+</div>
+    <footer class="team-footer">
+        <h3>Thành viên nhóm & Phân công</h3>
+        <div class="team-columns">
+          <ul class="team-list">
+            <li><strong>Phan Thị Thảo Nhi</strong> – Thiết kế giao diện</li>
+            <li><strong>Võ Anh Khôi</strong> – Tổng hợp nội dung</li>
+            <li><strong>Nguyễn Bá Khôi Nguyên</strong> – Hiệu ứng</li>
+            <li><strong>Nguyễn Trần Trung Hiếu</strong> – Biển đảo Việt Nam</li>
+            <li><strong>Nguyễn Như Ý</strong> – Vai trò kinh tế</li>
+            <li><strong>Lê Minh Khuê</strong> – Môi trường biển</li>
+          </ul>
+          <ul class="team-list">
+            <li><strong>Lê Quốc Khánh</strong> – Chủ quyền HS-TS</li>
+            <li><strong>Nguyễn Hoàng Anh Đức</strong> – Hành động bảo vệ</li>
+            <li><strong>Võ Văn Thiên Khang</strong> – Hình ảnh</li>
+            <li><strong>Nguyễn Bùi Phương Thi</strong> – Bảo vệ chủ quyền biển đảo Việt Nam</li>
+            <li><strong>Huỳnh Minh Lợi</strong> – Thuyết trình</li>
+          </ul>
+        </div>
+      </footer>
+      
 
     <script>
        function openModal(id) {
